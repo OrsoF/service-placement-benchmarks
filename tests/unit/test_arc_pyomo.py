@@ -10,8 +10,8 @@ import networkx as nx
 import numpy as np
 import pytest
 
-from mecbench.domain.network import NetworkSnapshot
-from mecbench.domain.problem_arrays import ProblemArrays
+from service_placement.domain.network import NetworkSnapshot
+from service_placement.domain.problem_arrays import ProblemArrays
 
 pytestmark = pytest.mark.requires("pyomo")
 SOLVERS = ("ilp_arc", "lp_arc", "milp_arc", "milp_arc_full")
@@ -24,7 +24,7 @@ def build_solver(name, data):
     problem = SimpleNamespace(
         data=data, network_graph=NetworkSnapshot.from_data(data, nx.DiGraph())
     )
-    solver = importlib.import_module(f"mecbench.solvers.{name}").Solver(problem)
+    solver = importlib.import_module(f"service_placement.solvers.{name}").Solver(problem)
     solver._build_model()
     solver._build_sets()
     solver._build_variables()

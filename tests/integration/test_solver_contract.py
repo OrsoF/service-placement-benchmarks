@@ -2,9 +2,9 @@
 
 import pytest
 
-from mecbench import make_tree_instance
-from mecbench.utils.solver_base import GenericSolver
-from mecbench.utils.solver_registry import SOLVER_MODULES, make_solver
+from service_placement import make_tree_instance
+from service_placement.utils.solver_base import GenericSolver
+from service_placement.utils.solver_registry import SOLVER_MODULES, make_solver
 from tests.optional import is_rl_module, module_requirements
 
 

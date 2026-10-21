@@ -8,7 +8,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from mecbench import (
+from service_placement import (
     MissingSolverDependencyError,
     SolverExecutionError,
     SolveStatus,
@@ -20,7 +20,7 @@ from mecbench import (
     solve,
     validate,
 )
-from mecbench.utils import solver_registry as registry
+from service_placement.utils import solver_registry as registry
 
 
 def test_user_quickstart_and_repeatability():
@@ -49,7 +49,7 @@ def test_tree_seed_is_metadata_for_deterministic_generator():
 
 
 def test_star_single_user_group_has_no_self_loops():
-    from mecbench import Solution
+    from service_placement import Solution
     from tests.helpers import route_solution
 
     problem = make_star_instance(n_groups=2, users_per_group=1, neighbors=3, seed=42)
@@ -61,7 +61,7 @@ def test_star_single_user_group_has_no_self_loops():
 
 
 def test_bad_baseline_does_not_prevent_a_feasible_instance_from_being_solved():
-    from mecbench import Solution
+    from service_placement import Solution
 
     problem = make_tree_instance(1, neighbors=0)
     assert not validate(
@@ -137,7 +137,7 @@ def test_missing_optional_import_has_installation_command(monkeypatch):
 
     monkeypatch.setattr(registry.importlib, "import_module", missing)
     with pytest.raises(
-        MissingSolverDependencyError, match=r"pip install 'mec-placement-benchmarks\[exact\]'"
+        MissingSolverDependencyError, match=r"pip install 'service-placement-benchmarks\[exact\]'"
     ):
         solve(make_tree_instance(2), solver="ilp_arc")
 
@@ -233,7 +233,7 @@ def test_license_failure_is_not_disguised_as_a_candidate(monkeypatch):
 def test_real_arc_adapter_records_structured_termination(monkeypatch, termination, incumbent):
     from pyomo.opt import SolverResults, TerminationCondition
 
-    import mecbench.solvers.ilp_arc as module
+    import service_placement.solvers.ilp_arc as module
 
     problem = make_tree_instance(2)
 
@@ -276,7 +276,7 @@ def test_mathematical_adapters_accept_optimizer_options(name):
 @pytest.mark.requires("stable_baselines3")
 @pytest.mark.rl
 def test_rl_seed_and_explicit_training_options_reach_base_solver(monkeypatch, name):
-    from mecbench.utils import rl_solvers
+    from service_placement.utils import rl_solvers
 
     def env(self, problem, max_step, reuse):
         return SimpleNamespace(max_step=max_step)
@@ -301,11 +301,11 @@ class BlockOptional(importlib.abc.MetaPathFinder):
         if fullname.split('.')[0] in {{'pyomo', 'gurobipy', 'cma', 'pandas', 'matplotlib', 'tqdm', 'gymnasium', 'stable_baselines3', 'torch'}}:
             raise RuntimeError('optional import: ' + fullname)
 sys.meta_path.insert(0, BlockOptional())
-from mecbench import make_tree_instance, solve, validate
+from service_placement import make_tree_instance, solve, validate
 p = make_tree_instance(n_users=20, seed=42)
 r = solve(p, solver='fast_heuristic', seed=42)
 assert validate(p, r.solution).feasible
-from mecbench.cli import main
+from service_placement.cli import main
 assert main(['--start-users', '2', '--stop-users', '3', '--seed', '42']) == 0
 print(r.objective)
 """

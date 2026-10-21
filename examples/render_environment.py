@@ -1,5 +1,5 @@
-from mecbench.environments.spp_env import SPPEnv
-from mecbench.instances.synthetic import make_tree_instance
+from service_placement.environments.spp_env import SPPEnv
+from service_placement.instances.synthetic import make_tree_instance
 
 
 def main() -> None:

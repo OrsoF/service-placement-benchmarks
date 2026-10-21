@@ -29,7 +29,7 @@
   "platform": "Windows-11-10.0.26200-SP0",
   "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
   "packages": {
-    "mec-placement-benchmarks": "0.1.0",
+    "service-placement-benchmarks": "0.1.0",
     "numpy": "2.5.4",
     "networkx": "3.7",
     "pandas": "3.0.1",

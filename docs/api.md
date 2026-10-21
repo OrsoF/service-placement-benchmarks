@@ -1,10 +1,10 @@
-# Using mecbench
+# Using service_placement
 
 Install from the repository with `python -m pip install -e .`. Python 3.10 or
 newer, NumPy and NetworkX are sufficient for the quickstart and the default CLI.
 
 ```python
-from mecbench import make_tree_instance, solve, validate
+from service_placement import make_tree_instance, solve, validate
 
 problem = make_tree_instance(n_users=20, seed=42)
 result = solve(problem, solver="fast_heuristic", seed=42)
@@ -55,7 +55,7 @@ dimensionally consistent. Historical attributes such as `problem.min_flows` and
 For example:
 
 ```python
-from mecbench import list_solvers, solve
+from service_placement import list_solvers, solve
 
 print(list_solvers())
 result = solve(problem, solver="fast_heuristic", seed=42,
@@ -127,7 +127,7 @@ validator and are retained with `invalid_solution`.
 Configuration errors raise `UnknownSolverError` or `MissingSolverDependencyError`
 (with an installation command). Execution failures raise `SolverExecutionError`,
 preserving the original cause; exact-solver failures include an installation and
-license hint. These exceptions are exported from `mecbench`.
+license hint. These exceptions are exported from `service_placement`.
 
 ## Validation
 
@@ -136,7 +136,7 @@ license hint. These exceptions are exported from `mecbench`.
 `problem.network_graph.arc_list`; node columns follow integer node indices.
 
 ```python
-from mecbench import Solution, validate
+from service_placement import Solution, validate
 
 candidate = Solution(x, y, q)
 report = validate(problem, candidate)
@@ -164,8 +164,8 @@ feasibility; solve and validate determine the status of actual candidates.
 ## Command line and results
 
 ```bash
-mecbench --seed 42
-mecbench --instance tree --solvers fast_heuristic heuristic --seed 42 --start-users 20 --stop-users 61 --step-users 20 --output artifacts/data/api_tree.csv
+service-placement --seed 42
+service-placement --instance tree --solvers fast_heuristic heuristic --seed 42 --start-users 20 --stop-users 61 --step-users 20 --output artifacts/data/api_tree.csv
 ```
 
 Without arguments the CLI solves one tree instance with 20 users and the fast

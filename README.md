@@ -1,8 +1,8 @@
-# MEC Placement Benchmarks
+# Service Placement Benchmarks
 
 **Benchmark service placement strategies before integrating them into an edge network orchestrator.**
 
-`mecbench` compares strategies for hosting services, routing traffic, and serving
+`service_placement` compares strategies for hosting services, routing traffic, and serving
 demand under latency, compute, and link-capacity constraints. Train and evaluate
 reinforcement learning alongside mathematical optimization and heuristics, using
 one Python API and a shared feasibility validator.
@@ -52,7 +52,7 @@ From a clone of this repository, with **Python 3.10+**:
 
 ```bash
 python -m pip install -e .
-mecbench --instance tree --solvers fast_heuristic heuristic --seed 42 --start-users 10 --stop-users 41 --step-users 10 --output artifacts/data/first_comparison.csv
+service-placement --instance tree --solvers fast_heuristic heuristic --seed 42 --start-users 10 --stop-users 41 --step-users 10 --output artifacts/data/first_comparison.csv
 ```
 
 This compares 10, 20, 30, and 40 users and exports CSV results. Higher scores mean
@@ -75,7 +75,7 @@ Here, both methods receive the same variant with double link capacity and
 20% tighter latency limits:
 
 ```python
-from mecbench import make_tree_instance, solve
+from service_placement import make_tree_instance, solve
 
 problem = make_tree_instance(n_users=20)
 scenario = problem.with_data(
@@ -96,8 +96,8 @@ Docker packages the benchmark as a CLI job, with results persisted to a mounted
 directory:
 
 ```bash
-docker build -t mecbench .
-docker run --rm -v "${PWD}/artifacts:/app/artifacts" mecbench --instance tree --solvers fast_heuristic heuristic --seed 42 --start-users 10 --stop-users 41 --step-users 10
+docker build -t service-placement .
+docker run --rm -v "${PWD}/artifacts:/app/artifacts" service-placement --instance tree --solvers fast_heuristic heuristic --seed 42 --start-users 10 --stop-users 41 --step-users 10
 ```
 
 Deploy the toolkit and runner as evaluation jobs; connecting their decisions to

@@ -3,12 +3,12 @@
 import numpy as np
 import pytest
 
-from mecbench import make_tree_instance, solve
-from mecbench.domain.conversions import compact_to_arc
-from mecbench.domain.solution import SolvingInstance
-from mecbench.domain.solution import compact_to_arc as legacy_compact_to_arc
-from mecbench.utils.heuristic_solvers import baseline_solution
-from mecbench.utils.solver_workspace import SolverWorkspace
+from service_placement import make_tree_instance, solve
+from service_placement.domain.conversions import compact_to_arc
+from service_placement.domain.solution import SolvingInstance
+from service_placement.domain.solution import compact_to_arc as legacy_compact_to_arc
+from service_placement.utils.heuristic_solvers import baseline_solution
+from service_placement.utils.solver_workspace import SolverWorkspace
 
 
 def test_public_solve_does_not_create_legacy_problem_state():

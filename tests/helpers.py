@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import networkx as nx
 import numpy as np
 
-from mecbench.domain.problem import NetworkGraph
+from service_placement.domain.problem import NetworkGraph
 
 
 def make_problem(edges=((0, 1),), nodes=2, demands=2, services=1):

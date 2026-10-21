@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from mecbench.domain.solution import SolvingInstance
-from mecbench.domain.solution import validate_arc_solution as legacy_validate_arc_solution
-from mecbench.domain.validation import SolutionValidationError, validate_arc_solution
+from service_placement.domain.solution import SolvingInstance
+from service_placement.domain.solution import validate_arc_solution as legacy_validate_arc_solution
+from service_placement.domain.validation import SolutionValidationError, validate_arc_solution
 from tests.helpers import make_problem, route_solution
 
 

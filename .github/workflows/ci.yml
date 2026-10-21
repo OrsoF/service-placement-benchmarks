@@ -27,8 +27,9 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install .
+      - run: python -I -m service_placement --help
       - run: python examples/quickstart.py
-      - run: mecbench --seed 42 --start-users 2 --stop-users 3
+      - run: service-placement --seed 42 --start-users 2 --stop-users 3
 
   test:
     runs-on: ${{ matrix.os }}
@@ -54,8 +55,8 @@ jobs:
       - if: matrix.profile == 'extras'
         run: python -m pytest -m "not rl" --require-extras
       - run: python -m build
-      - run: mecbench --help
-      - run: mecbench --instance tree --solvers fast_heuristic --start-users 2 --stop-users 3 --neighbors 0 --no-plots
+      - run: service-placement --help
+      - run: service-placement --instance tree --solvers fast_heuristic --start-users 2 --stop-users 3 --neighbors 0 --no-plots
       - uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' && matrix.profile == 'extras'
         with:
@@ -66,9 +67,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t mecbench .
-      - run: docker run --rm mecbench --help
-      - run: docker run --rm mecbench --instance tree --solvers fast_heuristic --start-users 2 --stop-users 3 --neighbors 0 --no-plots
+      - run: docker build -t service-placement .
+      - run: docker run --rm service-placement --help
+      - run: docker run --rm service-placement --instance tree --solvers fast_heuristic --start-users 2 --stop-users 3 --neighbors 0 --no-plots
 
   optional-rl:
     runs-on: ubuntu-latest

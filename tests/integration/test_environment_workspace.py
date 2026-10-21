@@ -5,8 +5,8 @@ import copy
 import numpy as np
 import pytest
 
-from mecbench import make_tree_instance
-from mecbench.domain.loads import residual_arrays
+from service_placement import make_tree_instance
+from service_placement.domain.loads import residual_arrays
 
 pytestmark = pytest.mark.requires("gymnasium")
 
@@ -19,7 +19,7 @@ def assert_graph_attributes_equal(graph, snapshot):
 
 
 def test_shared_problem_environments_are_isolated():
-    from mecbench.environments.spp_env import SPPEnv
+    from service_placement.environments.spp_env import SPPEnv
 
     problem = make_tree_instance(2, neighbors=0)
     original_graph = copy.deepcopy(problem.network_graph.nx_graph)
@@ -55,7 +55,7 @@ def test_shared_problem_environments_are_isolated():
 
 @pytest.mark.parametrize("name", ["PlacementRoutingEnv", "FlowSetupEnv"])
 def test_hierarchical_environments_share_the_isolation_contract(name):
-    from mecbench.environments import hrl_env
+    from service_placement.environments import hrl_env
 
     problem = make_tree_instance(2, neighbors=0)
     original = copy.deepcopy(problem.network_graph.nx_graph)
@@ -71,7 +71,7 @@ def test_hierarchical_environments_share_the_isolation_contract(name):
 
 
 def test_reset_on_another_instance_rebuilds_an_isolated_workspace():
-    from mecbench.environments.spp_env import SPPEnv
+    from service_placement.environments.spp_env import SPPEnv
 
     first_problem = make_tree_instance(2, neighbors=0)
     second_problem = first_problem.with_data(arc_capacities=[20] * first_problem.data.n_arcs)

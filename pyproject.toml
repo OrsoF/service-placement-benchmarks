@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mec-placement-benchmarks"
+name = "service-placement-benchmarks"
 version = "0.1.0"
 description = "Service placement benchmarks for mobile edge computing"
 readme = "README.md"
@@ -23,14 +23,14 @@ test = ["pytest>=7", "build>=1"]
 dev = ["pytest>=7", "build>=1", "ruff==0.12.0", "mypy==1.17.1"]
 
 [project.scripts]
-mecbench = "mecbench.cli:main"
+service-placement = "service_placement.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["mecbench*"]
+include = ["service_placement*"]
 
 [tool.setuptools.package-data]
-mecbench = ["py.typed"]
+service_placement = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -50,13 +50,13 @@ select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
 python_version = "3.10"
 mypy_path = "src"
 files = [
-  "src/mecbench/api.py", "src/mecbench/errors.py",
-  "src/mecbench/domain/contracts.py", "src/mecbench/domain/solution.py", "src/mecbench/domain/validation.py", "src/mecbench/domain/loads.py",
-  "src/mecbench/domain/problem_arrays.py",
-  "src/mecbench/domain/conversions.py",
-  "src/mecbench/utils/solver_base.py", "src/mecbench/utils/solver_registry.py",
-  "src/mecbench/utils/ilp_solvers.py", "src/mecbench/utils/heuristic_solvers.py",
-  "src/mecbench/compat/problem_state.py",
+  "src/service_placement/api.py", "src/service_placement/errors.py",
+  "src/service_placement/domain/contracts.py", "src/service_placement/domain/solution.py", "src/service_placement/domain/validation.py", "src/service_placement/domain/loads.py",
+  "src/service_placement/domain/problem_arrays.py",
+  "src/service_placement/domain/conversions.py",
+  "src/service_placement/utils/solver_base.py", "src/service_placement/utils/solver_registry.py",
+  "src/service_placement/utils/ilp_solvers.py", "src/service_placement/utils/heuristic_solvers.py",
+  "src/service_placement/compat/problem_state.py",
 ]
 follow_imports = "silent"
 strict = true

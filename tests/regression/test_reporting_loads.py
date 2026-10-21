@@ -3,10 +3,10 @@
 import numpy as np
 import pytest
 
-from mecbench.domain.loads import residual_arrays
-from mecbench.domain.solution import Solution
-from mecbench.domain.validation import validate
-from mecbench.utils.solver_workspace import SolverWorkspace
+from service_placement.domain.loads import residual_arrays
+from service_placement.domain.solution import Solution
+from service_placement.domain.validation import validate
+from service_placement.utils.solver_workspace import SolverWorkspace
 from tests.helpers import make_problem, route_solution
 
 
@@ -41,7 +41,7 @@ def test_working_graph_preserves_separate_directed_arc_loads():
 def test_plot_summary_displays_total_traffic_latency(shared_arc):
     import matplotlib.pyplot as plt
 
-    from mecbench.benchmarks.reporting import plot_instance_solution
+    from service_placement.benchmarks.reporting import plot_instance_solution
 
     plt.switch_backend("Agg")
     problem, (x, y, q) = shared_arc

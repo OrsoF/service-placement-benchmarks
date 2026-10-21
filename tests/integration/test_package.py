@@ -12,17 +12,17 @@ from types import SimpleNamespace
 
 import pytest
 
-from mecbench import SolveStatus
-from mecbench.benchmarks import runner
-from mecbench.cli import main
-from mecbench.instances.synthetic import create_tree_problem_instance
+from service_placement import SolveStatus
+from service_placement.benchmarks import runner
+from service_placement.cli import main
+from service_placement.instances.synthetic import create_tree_problem_instance
 from tests.optional import is_rl_module, module_requirements
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "src"
 MODULES = sorted(
     ".".join(path.relative_to(SOURCE).with_suffix("").parts).removesuffix(".__init__")
-    for path in (SOURCE / "mecbench").rglob("*.py")
+    for path in (SOURCE / "service_placement").rglob("*.py")
 )
 
 
@@ -44,7 +44,7 @@ def test_public_modules_import(module):
 
 
 def test_local_imports_and_dynamic_registry_paths_exist():
-    for path in (SOURCE / "mecbench").rglob("*.py"):
+    for path in (SOURCE / "service_placement").rglob("*.py"):
         for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
             modules = []
             if isinstance(node, ast.Import):
@@ -52,10 +52,10 @@ def test_local_imports_and_dynamic_registry_paths_exist():
             elif isinstance(node, ast.ImportFrom) and node.module:
                 modules = [node.module]
             elif isinstance(node, ast.Constant) and isinstance(node.value, str):
-                if node.value.startswith("mecbench.") and " " not in node.value:
+                if node.value.startswith("service_placement.") and " " not in node.value:
                     modules = [node.value]
             for module in modules:
-                if module.startswith("mecbench."):
+                if module.startswith("service_placement."):
                     assert importlib.util.find_spec(module) is not None, (path, module)
                 else:
                     assert module.split(".")[0] not in {
@@ -69,9 +69,9 @@ def test_local_imports_and_dynamic_registry_paths_exist():
 
 
 def test_solver_aliases_and_package_directory():
-    from mecbench.utils.solver_registry import SOLVER_FILE_ALIASES, SOLVER_MODULES
+    from service_placement.utils.solver_registry import SOLVER_FILE_ALIASES, SOLVER_MODULES
 
-    assert (SOURCE / "mecbench/solvers").is_dir()
+    assert (SOURCE / "service_placement/solvers").is_dir()
     assert set(SOLVER_FILE_ALIASES.values()) <= set(SOLVER_MODULES)
 
 
@@ -79,7 +79,7 @@ def run_cli(tmp_path, *args):
     environment = os.environ.copy()
     environment["PYTHONPATH"] = str(SOURCE) + os.pathsep + environment.get("PYTHONPATH", "")
     return subprocess.run(
-        [sys.executable, "-m", "mecbench", *args],
+        [sys.executable, "-m", "service_placement", *args],
         cwd=tmp_path,
         env=environment,
         capture_output=True,
@@ -129,7 +129,7 @@ def test_cli_rejects_invalid_step_before_creating_output(tmp_path):
 
 
 def test_benchmark_runner_rejects_infeasible_solver_output(monkeypatch):
-    from mecbench import api
+    from service_placement import api
 
     problem = create_tree_problem_instance(2, 0)
     candidate = SimpleNamespace(

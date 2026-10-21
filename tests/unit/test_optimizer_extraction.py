@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from mecbench.utils.ilp_solvers import arc_model_arrays, path_model_arrays
+from service_placement.utils.ilp_solvers import arc_model_arrays, path_model_arrays
 
 
 def test_absent_optimizer_values_remain_unusable():

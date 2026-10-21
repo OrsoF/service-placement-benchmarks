@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from mecbench import Solution, SolutionValidationError, validate
+from service_placement import Solution, SolutionValidationError, validate
 from tests.helpers import make_problem, route_solution
 
 

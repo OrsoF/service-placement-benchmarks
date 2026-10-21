@@ -1,13 +1,13 @@
 import pytest
 
-from mecbench.domain.solution import SolvingInstance
-from mecbench.domain.validation import SolutionValidationError
+from service_placement.domain.solution import SolvingInstance
+from service_placement.domain.validation import SolutionValidationError
 from tests.helpers import make_problem
 
 
 def test_rl_state_feasibility_uses_reference_validator(shared_arc):
-    from mecbench.environments.path_cache import ShortestPathCache
-    from mecbench.environments.state_codec import is_feasible_state
+    from service_placement.environments.path_cache import ShortestPathCache
+    from service_placement.environments.state_codec import is_feasible_state
 
     problem, _ = shared_arc
     problem.latencies = [3, 3]
@@ -18,7 +18,7 @@ def test_rl_state_feasibility_uses_reference_validator(shared_arc):
 
 
 def test_problem_instance_current_solution_uses_reference_validator():
-    from mecbench.domain.problem import Demand, ProblemInstance, Service, ServicePackage
+    from service_placement.domain.problem import Demand, ProblemInstance, Service, ServicePackage
 
     network = make_problem().network_graph
     service = Service([Demand(0, 1, 10, 3), Demand(0, 1, 10, 3)], network, 2)

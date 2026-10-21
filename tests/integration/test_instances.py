@@ -12,7 +12,7 @@ from pathlib import Path
 
 import networkx as nx
 
-from mecbench.instances.synthetic import (
+from service_placement.instances.synthetic import (
     create_gml_problem_instance,
     create_large_problem_instance,
     create_star_problem_instance,

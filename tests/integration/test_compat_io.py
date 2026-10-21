@@ -2,7 +2,7 @@
 
 import pytest
 
-from mecbench.compat.pickle_io import pickle_load, pickle_save
+from service_placement.compat.pickle_io import pickle_load, pickle_save
 
 
 def test_pickle_helpers_round_trip(tmp_path):
@@ -14,7 +14,7 @@ def test_pickle_helpers_round_trip(tmp_path):
 
 @pytest.mark.requires("pandas")
 def test_experiment_pickle_exports_use_the_shared_implementation():
-    from mecbench.compat import experiment_io
+    from service_placement.compat import experiment_io
 
     assert experiment_io.pickle_save is pickle_save
     assert experiment_io.pickle_load is pickle_load

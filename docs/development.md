@@ -68,12 +68,12 @@ outside strict coverage; add them to this list as their annotations mature.
 Following their imports silently allows this incremental approach without
 globally suppressing errors in checked files. NetworkX's missing external stubs
 have a named override. Dynamic solver options and indexed optimizer objects use
-`Any` at the adapter boundary. The distribution includes `mecbench/py.typed`.
+`Any` at the adapter boundary. The distribution includes `service_placement/py.typed`.
 
 ## Adding a solver
 
-Create `src/mecbench/solvers/<name>.py` with a `Solver` class. Subclass
-`GenericSolver` from `mecbench.utils.solver_base` and call
+Create `src/service_placement/solvers/<name>.py` with a `Solver` class. Subclass
+`GenericSolver` from `service_placement.utils.solver_base` and call
 `super().__init__(problem)` explicitly.
 Implement `run`, populate outputs through `_set_output_variables`, and record
 metrics and termination information. Register the flat module in

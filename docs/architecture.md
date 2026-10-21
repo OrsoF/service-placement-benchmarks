@@ -1,33 +1,33 @@
 # Architecture and migration
 
-`mecbench` is installed from `src/`. Runtime imports use that namespace;
+`service_placement` is installed from `src/`. Runtime imports use that namespace;
 there is no need to add the repository root to `sys.path`.
 
 | Previous module | Current module |
 | --- | --- |
-| `core.problem_classes.*` | `mecbench.domain.problem` |
-| `core.solution`, `core.problem_classes.solving_instance` | `mecbench.domain.solution` |
-| `core.feasibility` | `mecbench.domain.validation` |
-| `core.generic_solver` | `mecbench.utils.solver_base` |
-| `core.pyomo_model` | `mecbench.utils.ilp_solvers` |
-| `instances.builder` | `mecbench.instances.synthetic` |
-| `instances.graph_build` | `mecbench.instances.topology` |
-| `solvers.heuristic`, `mecbench.solvers.heuristics.*` | `mecbench.solvers.*` |
-| `solvers.exact`, `solvers.relaxations`, `mecbench.solvers.exact.*`, `mecbench.solvers.relaxations.*` | `mecbench.solvers.*` |
-| `solvers.evolutionary`, `solvers.rl`, `mecbench.solvers.evolutionary.*`, `mecbench.solvers.rl.*` | `mecbench.solvers.*` |
-| `mecbench.solvers.base`, `mecbench.solvers.contracts` | `mecbench.utils.solver_base` |
-| `mecbench.solvers.registry` | `mecbench.utils.solver_registry` |
-| `mecbench.solvers.workspace`, `mecbench.solvers.graph_state` | `mecbench.utils.solver_workspace` |
-| `mecbench.solvers.paths` | `mecbench.utils.solver_paths` |
-| `mecbench.solvers.search`, `mecbench.solvers.initialization` | `mecbench.utils.heuristic_solvers` |
-| `mecbench.solvers.model_utils`, `mecbench.solvers.exact.extraction` | `mecbench.utils.ilp_solvers` |
-| `mecbench.solvers.rl.base_solver` | `mecbench.utils.rl_solvers` |
-| `mecbench.solvers.arc_formulation`, `mecbench.solvers.path_formulation` | `mecbench.utils.arc_formulation`, `mecbench.utils.path_formulation` |
-| `rl.*` | `mecbench.environments.*` |
-| `data_io.experiment_io`, `mecbench.benchmarks.io` | `mecbench.compat.experiment_io` |
-| `mecbench.benchmarks.pickle_io` | `mecbench.compat.pickle_io` |
-| `plotting.result_plots` | `mecbench.benchmarks.reporting` |
-| `exp.py` | `mecbench.cli`, `mecbench.benchmarks.runner` |
+| `core.problem_classes.*` | `service_placement.domain.problem` |
+| `core.solution`, `core.problem_classes.solving_instance` | `service_placement.domain.solution` |
+| `core.feasibility` | `service_placement.domain.validation` |
+| `core.generic_solver` | `service_placement.utils.solver_base` |
+| `core.pyomo_model` | `service_placement.utils.ilp_solvers` |
+| `instances.builder` | `service_placement.instances.synthetic` |
+| `instances.graph_build` | `service_placement.instances.topology` |
+| `solvers.heuristic`, `service_placement.solvers.heuristics.*` | `service_placement.solvers.*` |
+| `solvers.exact`, `solvers.relaxations`, `service_placement.solvers.exact.*`, `service_placement.solvers.relaxations.*` | `service_placement.solvers.*` |
+| `solvers.evolutionary`, `solvers.rl`, `service_placement.solvers.evolutionary.*`, `service_placement.solvers.rl.*` | `service_placement.solvers.*` |
+| `service_placement.solvers.base`, `service_placement.solvers.contracts` | `service_placement.utils.solver_base` |
+| `service_placement.solvers.registry` | `service_placement.utils.solver_registry` |
+| `service_placement.solvers.workspace`, `service_placement.solvers.graph_state` | `service_placement.utils.solver_workspace` |
+| `service_placement.solvers.paths` | `service_placement.utils.solver_paths` |
+| `service_placement.solvers.search`, `service_placement.solvers.initialization` | `service_placement.utils.heuristic_solvers` |
+| `service_placement.solvers.model_utils`, `service_placement.solvers.exact.extraction` | `service_placement.utils.ilp_solvers` |
+| `service_placement.solvers.rl.base_solver` | `service_placement.utils.rl_solvers` |
+| `service_placement.solvers.arc_formulation`, `service_placement.solvers.path_formulation` | `service_placement.utils.arc_formulation`, `service_placement.utils.path_formulation` |
+| `rl.*` | `service_placement.environments.*` |
+| `data_io.experiment_io`, `service_placement.benchmarks.io` | `service_placement.compat.experiment_io` |
+| `service_placement.benchmarks.pickle_io` | `service_placement.compat.pickle_io` |
+| `plotting.result_plots` | `service_placement.benchmarks.reporting` |
+| `exp.py` | `service_placement.cli`, `service_placement.benchmarks.runner` |
 
 The domain defines demands, networks, services, packages, and problems.
 `domain.network` owns graph data, `domain.services` owns demands and services,

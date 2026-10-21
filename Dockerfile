@@ -5,9 +5,9 @@ WORKDIR /app
 
 COPY pyproject.toml README.md LICENSE ./
 COPY src/ ./src/
-ARG MECBENCH_EXTRAS=benchmarks
-RUN python -m pip install --no-cache-dir ".[${MECBENCH_EXTRAS}]"
+ARG SERVICE_PLACEMENT_EXTRAS=benchmarks
+RUN python -m pip install --no-cache-dir ".[${SERVICE_PLACEMENT_EXTRAS}]"
 COPY data/ ./data/
 
-ENTRYPOINT ["mecbench"]
+ENTRYPOINT ["service-placement"]
 CMD ["--help"]

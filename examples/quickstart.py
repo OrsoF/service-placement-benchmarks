@@ -1,6 +1,6 @@
-"""Run after installing mec-placement-benchmarks; no optional extras needed."""
+"""Run after installing service-placement-benchmarks; no optional extras needed."""
 
-from mecbench import make_tree_instance, solve, validate
+from service_placement import make_tree_instance, solve, validate
 
 
 def main():

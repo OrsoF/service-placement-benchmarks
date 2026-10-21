@@ -1,6 +1,6 @@
 # Benchmark experiments
 
-Run commands from the repository root after installing `mecbench`.
+Run commands from the repository root after installing `service_placement`.
 For the full solver sweeps below, install the optional dependencies:
 
 ```bash
@@ -69,16 +69,16 @@ without a general performance claim.
 
 ## Tree and star sweeps
 
-`mecbench` reproduces the tree and star benchmark sweeps. It appends rows to
+`service_placement` reproduces the tree and star benchmark sweeps. It appends rows to
 `artifacts/data/*.csv` and writes objective/runtime plots under
 `artifacts/figures/`.
 
 ```bash
-mecbench --instance tree --solvers ilp_arc heuristic fast_heuristic cma_es ppo hierarchical_ppo --seed 42 --start-users 20 --stop-users 410 --step-users 10 --plots
-mecbench --instance star --solvers ilp_arc heuristic fast_heuristic cma_es ppo hierarchical_ppo --seed 42 --groups 4 --start-users 15 --stop-users 125 --step-users 5 --plots
+service-placement --instance tree --solvers ilp_arc heuristic fast_heuristic cma_es ppo hierarchical_ppo --seed 42 --start-users 20 --stop-users 410 --step-users 10 --plots
+service-placement --instance star --solvers ilp_arc heuristic fast_heuristic cma_es ppo hierarchical_ppo --seed 42 --groups 4 --start-users 15 --stop-users 125 --step-users 5 --plots
 ```
 
-`python -m mecbench` invokes the same CLI. Use `--instance tree` or `--instance star`
+`python -m service_placement` invokes the same CLI. Use `--instance tree` or `--instance star`
 to select the experiment topology.
 
 The tree experiment builds instances with `create_tree_problem_instance(n_users,
@@ -120,12 +120,12 @@ Default figures:
 ## Docker
 
 ```bash
-docker build -t mecbench .
-docker run --rm mecbench --help
-docker run --rm -v "${PWD}/artifacts:/app/artifacts" mecbench --instance tree --solvers fast_heuristic --start-users 2 --stop-users 3 --neighbors 0 --no-plots
+docker build -t service-placement .
+docker run --rm service-placement --help
+docker run --rm -v "${PWD}/artifacts:/app/artifacts" service-placement --instance tree --solvers fast_heuristic --start-users 2 --stop-users 3 --neighbors 0 --no-plots
 ```
 
 The default image includes benchmark/reporting dependencies. To include exact
-solvers, build with `--build-arg MECBENCH_EXTRAS=benchmarks,exact,gurobi`; configure
+solvers, build with `--build-arg SERVICE_PLACEMENT_EXTRAS=benchmarks,exact,gurobi`; configure
 your Gurobi license in the container. RL and evolutionary extras are available
 through the same build argument.
